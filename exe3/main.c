@@ -34,6 +34,17 @@ int main() {
     while (true) {
 
         if (flag_f_r) {
+            uint32_t start_time = to_ms_since_boot(get_absolute_time());
+            bool ficou_ligado = true;
+            while ((to_ms_since_boot(get_absolute_time()) - start_time) < 500) {
+                if (!flag_f_r) {
+                    ficou_ligado = false;
+                }
+            }
+            if (ficou_ligado) {
+                gpio_put(LED_PIN_R, !gpio_get(LED_PIN_R));
+            }
+            
         }
     }
 }
